@@ -1,11 +1,3 @@
-SELECT *
-FROM PortfolioProject..covid_deaths
-
-
-SELECT *
-FROM PortfolioProject..covid_vaccinations
-
-
 --Global
 CREATE VIEW global_covid_overview AS
 SELECT 
@@ -20,12 +12,7 @@ SELECT
 FROM PortfolioProject..covid_deaths AS dth
 JOIN PortfolioProject..covid_vaccinations AS vaxx
     ON dth.country = vaxx.country;
-
 GO
-
---DROP VIEW PortfolioProject..global_covid_overview
-
-
 
 --Mortality Rate
 CREATE VIEW mortality_rate AS
@@ -38,8 +25,6 @@ SELECT
 	(total_death / total_case) * 100 AS mortality_rate
 FROM PortfolioProject..covid_deaths
 GO
-
-SELECT * FROM PortfolioProject..mortality_rate
 
 --Recovery Rate
 CREATE VIEW recovery_rate AS
@@ -55,9 +40,6 @@ JOIN PortfolioProject..covid_deaths dth
 	ON vaxx.country = dth.country
 GO
 
-SELECT * FROM PortfolioProject..recovery_rate
-DROP VIEW recovery_rate
-
 --Testing efficiency per 1000
 CREATE VIEW testing_efficiency AS
 SELECT
@@ -71,9 +53,7 @@ FROM PortfolioProject..covid_vaccinations vaxx
 LEFT JOIN PortfolioProject..covid_deaths dth
 	ON vaxx.country = dth.country
 GO
-
-SELECT * FROM PortfolioProject..testing_efficiency
-
+	
 --Regional Overview
 CREATE VIEW regional_overview AS
 SELECT
@@ -86,9 +66,4 @@ FROM PortfolioProject..covid_deaths dth
 JOIN PortfolioProject..covid_vaccinations vaxx
 	ON dth.country = vaxx.country
 GROUP BY dth.who_region
-
 GO
-
-SELECT * FROM PortfolioProject..regional_overview
-
-
